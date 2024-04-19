@@ -1,0 +1,100 @@
+body {
+  font-family: Arial, sans-serif;
+  background-image: url(images/wooden-bcg.jpg);
+  background-color: rgba(255, 255, 255, 0.5);
+}
+
+.container {
+  max-width: 100%;
+  margin: 100px auto;
+}
+
+.content {
+  border: 1px solid gray;
+  box-shadow: 5px 5px 10px 0 rgba(0, 0, 0, 0.3);
+  width: 700px;
+  margin: 100px auto;
+  background-color: rgba(245, 245, 245, 0.6);
+  border-radius: 20px;
+}
+
+.input-row {
+  margin-left: 20px;
+}
+
+.input-row input {
+  margin-right: 10px;
+  width: 300px;
+  height: 30px;
+}
+
+.button-row {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-right: 20px;
+}
+
+#showCompleted {
+  background-color: #4caf50;
+}
+
+#showActive {
+  background-color: #2196f3;
+}
+
+#showAll {
+  background-color: #ff9800;
+}
+
+#addTodo {
+  background-color: #1976d2;
+}
+
+.content ul {
+    border: 1px solid gray;
+    background-color: whitesmoke;
+    margin: 20px;
+    border-radius: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+#todoList li {
+  margin-top: 10px;
+  font-size: 20px;
+}
+
+h1,
+h2 {
+  text-align: center;
+  font-family: cursive;
+  font-weight: bold;
+}
+
+button {
+  border: none;
+  width: auto;
+  height: 30px;
+  border-radius: 7px;
+  font-weight: 600;
+  margin-top: 10px;
+  cursor: pointer;
+}
+
+.completed {
+  text-decoration: line-through;
+  opacity: 0.5;
+}
+
+li {
+  position: relative;
+}
+
+.trash-can {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
