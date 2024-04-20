@@ -7,12 +7,17 @@ const showAllBtn = document.getElementById("showAll");
 
 function initListeners() {
   addTodoBtn.addEventListener("click", addTodo);
+  todoInput.addEventListener("keydown", handleInputKeyPress);
 
   showCompletedBtn.addEventListener("click", showCompletedTodos);
 
   showActiveBtn.addEventListener("click", showActiveTodos);
 
   showAllBtn.addEventListener("click", showAllTodos);
+
+  todoList.addEventListener("dragstart", handleDragStart);
+  todoList.addEventListener("dragover", handleDragOver);
+  todoList.addEventListener("drop", handleDrop);
 }
 
 function addTodo() {
@@ -24,13 +29,22 @@ function addTodo() {
             </button>
             <input type="checkbox">
             <span>${todoText}</span>
-            <span class="trash-can"><i class="fas fa-trash-alt"></i></span>
+            <button class="trash-can"><i class="fas fa-trash-alt"></i></button>
         `;
     todoList.appendChild(li);
     todoInput.value = "";
-    li.querySelector(".trash-can").addEventListener("click", removeTodo);
     li.querySelector(".edit-todo").addEventListener("click", editTodo);
+    li.querySelector(".trash-can").addEventListener("click", removeTodo);
+
+    li.draggable = true;
+    li.addEventListener("dragstart", handleDragStart);
   }
+}
+
+function handleInputKeyPress(event) {
+    if (event.key === "Enter") {
+        addTodo();
+    }
 }
 
 function showCompletedTodos() {
@@ -69,34 +83,63 @@ function removeTodo() {
 }
 
 function editTodo(event) {
-    const todoItem = event.target.closest('li');
-    const todoText = todoItem.querySelector('span');
-    const currentText = todoText.textContent;
+  const todoItem = event.target.closest("li");
+  const todoText = todoItem.querySelector("span");
+  const currentText = todoText.textContent;
 
-    const inputField = document.createElement('input');
-    inputField.type = 'text';
-    inputField.value = currentText;
+  const inputField = document.createElement("input");
+  inputField.type = "text";
+  inputField.value = currentText;
 
-    todoText.replaceWith(inputField);
+  todoText.replaceWith(inputField);
 
-    const confirmButton = document.createElement('button');
-    confirmButton.textContent = 'Done';
-    confirmButton.style.backgroundColor = '#4caf50';
+  const confirmButton = document.createElement("button");
+  confirmButton.textContent = "Done";
+  confirmButton.style.backgroundColor = "#4caf50";
 
-    confirmButton.addEventListener('click', () => {
-        const newText = inputField.value;
-        if (newText.trim() !== '') {
-            todoText.textContent = newText;
-            inputField.replaceWith(todoText);
-        } else {
-            todoItem.remove();
+  function handleConfirmButtonClick(){
+    const newText = inputField.value;
+    if (newText.trim() !== "") {
+      todoText.textContent = newText;
+      inputField.replaceWith(todoText);
+    } else {
+      todoItem.remove();
+    }
+    confirmButton.remove();
+  }
+
+  confirmButton.addEventListener("click", handleConfirmButtonClick);
+
+    inputField.addEventListener("keydown", function(event) {
+        if (event.key === "Enter") {
+            handleConfirmButtonClick();
         }
-        confirmButton.remove();
     });
 
-    todoItem.appendChild(confirmButton);
+  todoItem.appendChild(confirmButton);
 
-    inputField.focus();
+  inputField.focus();
+}
+
+function handleDragStart(event) {
+    draggedItem = event.target;
+    event.dataTransfer.setData('text/plain', draggedItem.dataset.id);
+}
+
+function handleDragOver(event) {
+    event.preventDefault();
+}
+
+function handleDrop(event) {
+    event.preventDefault();
+    const dropItem = event.target.closest('li');
+    if (draggedItem !== dropItem) {
+        const todoList = dropItem.parentNode;
+        const dropIndex = [...todoList.children].indexOf(dropItem);
+        const dragIndex = [...todoList.children].indexOf(draggedItem);
+        todoList.insertBefore(draggedItem, dropIndex > dragIndex ? dropItem.nextSibling : dropItem);
+    }
+    draggedItem = null;
 }
 
 initListeners();
