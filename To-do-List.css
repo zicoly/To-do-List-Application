@@ -1,0 +1,245 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  background-image: url(images/wooden-bcg.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-color: rgba(255, 255, 255, 0.5);
+  overflow: hidden;
+}
+
+.container {
+  max-width: 100%;
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+.content {
+  border: 1px solid gray;
+  box-shadow: 5px 5px 10px 0 rgba(0, 0, 0, 0.3);
+  width: 800px;
+  margin: 100px auto;
+  background-color: rgba(245, 245, 245, 0.6);
+  border-radius: 20px;
+}
+
+.input-row {
+  margin-left: 20px;
+}
+
+.input-row input {
+  margin-right: 10px;
+  width: 300px;
+  height: 30px;
+}
+
+.button-row {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-right: 20px;
+}
+
+button {
+  border: none;
+  width: auto;
+  height: 30px;
+  border-radius: 7px;
+  font-weight: 600;
+  margin-top: 10px;
+  cursor: pointer;
+}
+
+button:active {
+  box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.5);
+}
+
+#showCompleted {
+  background-color: #4caf50;
+}
+
+#showActive {
+  background-color: #2196f3;
+}
+
+#showAll {
+  background-color: #ff9800;
+}
+
+#addTodo {
+  background-color: #1976d2;
+}
+
+.content ul {
+  border: 1px solid gray;
+  background-color: whitesmoke;
+  margin: 20px;
+  border-radius: 20px;
+  padding: 10px;
+  height: 350px;
+  overflow-y: auto;
+}
+
+.content ul::-webkit-scrollbar {
+  display: none;
+}
+
+#todoList li {
+  font-size: 20px;
+  list-style-type: none;
+  position: relative;
+  padding-right: 40px;
+}
+
+#todoList li button {
+  border: none;
+  background-color: whitesmoke;
+}
+
+h1,
+h2 {
+  text-align: center;
+  font-family: cursive;
+  font-weight: bold;
+}
+
+.completed {
+  text-decoration: line-through;
+  opacity: 0.5;
+}
+
+li {
+  position: relative;
+}
+
+#todoList li .trash-can {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+
+@media only screen and (max-width: 767px) {
+  body {
+    margin: 0;
+    padding: 0;
+    background-position: center;
+  }
+
+  .container {
+    margin-bottom: 100%;
+  }
+
+  .content ul {
+    height: 320px;
+    border-radius: 10px;
+  }
+
+  h1,
+  h2 {
+    margin-top: 15px;
+    font-size: 20px;
+  }
+  
+  #todoList li span {
+    max-width: calc(100% - 60px);
+  }
+
+  #todoList li {
+    font-size: 12px;
+    padding-right: 25px;
+    margin: 0;
+  }
+
+  ul#todoList {
+    margin: 10px;
+    padding: 0;
+  }
+
+  .content {
+    width: 90%;
+    margin: 100px auto;
+  }
+
+  #todoInput {
+    width: 250px;
+  }
+
+  .button-row {
+    margin-top: 5px;
+  }
+
+  button {
+    font-size: 10px;
+  }
+}
+
+@media (width: 412px), (width: 414px), (width: 390px), (width: 430px){
+  .content {
+    margin-top: 100px;
+  }
+
+  .content ul {
+    height: 500px;
+  }
+}
+
+@media (width: 375px) {
+  #todoInput {
+    width: 230px;
+  }
+}
+
+@media (width: 768px), (width: 820px), (width: 853px), (width: 912px){
+  body {
+    margin: 0;
+    padding: 0;
+    background-position: center;
+  }
+
+  .container {
+    margin-top: 150px;
+    margin-bottom: 100%;
+  }
+
+  .content {
+    margin-top: 0;
+    width: 95%;
+  }
+
+  .content ul {
+    height: 700px;
+  }
+}
+
+@media (width: 1024px) {
+  body {
+    margin: 0;
+    padding: 0;
+    background-position: center;
+  }
+
+  .container {
+    margin-bottom: 500px;
+  }
+
+  .content {
+    margin-top: 150px;
+  }
+
+  .content ul {
+    height: 700px;
+  }
+}
+
+@media (width: 1024px),(height: 600px) {
+  .content {
+    margin-top: 50px;
+  }
+
+  .content ul {
+    height: 220px;
+  }
+}
