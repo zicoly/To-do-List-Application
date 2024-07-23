@@ -42,13 +42,14 @@ function addTodo() {
 }
 
 function handleInputKeyPress(event) {
-    if (event.key === "Enter") {
-        addTodo();
-    }
+  if (event.key === "Enter") {
+    addTodo();
+  }
 }
 
 function showCompletedTodos() {
   const todos = todoList.querySelectorAll("li");
+  console.log(todos);
   todos.forEach((todo) => {
     const checkbox = todo.querySelector('input[type="checkbox"]');
     if (checkbox.checked) {
@@ -97,7 +98,7 @@ function editTodo(event) {
   confirmButton.textContent = "Done";
   confirmButton.style.backgroundColor = "#4caf50";
 
-  function handleConfirmButtonClick(){
+  function handleConfirmButtonClick() {
     const newText = inputField.value;
     if (newText.trim() !== "") {
       todoText.textContent = newText;
@@ -110,11 +111,11 @@ function editTodo(event) {
 
   confirmButton.addEventListener("click", handleConfirmButtonClick);
 
-    inputField.addEventListener("keydown", function(event) {
-        if (event.key === "Enter") {
-            handleConfirmButtonClick();
-        }
-    });
+  inputField.addEventListener("keydown", function (event) {
+    if (event.key === "Enter") {
+      handleConfirmButtonClick();
+    }
+  });
 
   todoItem.appendChild(confirmButton);
 
@@ -122,24 +123,27 @@ function editTodo(event) {
 }
 
 function handleDragStart(event) {
-    draggedItem = event.target;
-    event.dataTransfer.setData('text/plain', draggedItem.dataset.id);
+  draggedItem = event.target;
+  event.dataTransfer.setData("text/plain", draggedItem.dataset.id);
 }
 
 function handleDragOver(event) {
-    event.preventDefault();
+  event.preventDefault();
 }
 
 function handleDrop(event) {
-    event.preventDefault();
-    const dropItem = event.target.closest('li');
-    if (draggedItem !== dropItem) {
-        const todoList = dropItem.parentNode;
-        const dropIndex = [...todoList.children].indexOf(dropItem);
-        const dragIndex = [...todoList.children].indexOf(draggedItem);
-        todoList.insertBefore(draggedItem, dropIndex > dragIndex ? dropItem.nextSibling : dropItem);
-    }
-    draggedItem = null;
+  event.preventDefault();
+  const dropItem = event.target.closest("li");
+  if (draggedItem !== dropItem) {
+    const todoList = dropItem.parentNode;
+    const dropIndex = [...todoList.children].indexOf(dropItem);
+    const dragIndex = [...todoList.children].indexOf(draggedItem);
+    todoList.insertBefore(
+      draggedItem,
+      dropIndex > dragIndex ? dropItem.nextSibling : dropItem
+    );
+  }
+  draggedItem = null;
 }
 
 initListeners();
